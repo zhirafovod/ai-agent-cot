@@ -1,6 +1,6 @@
 # CoT Agent Demonstration
 
-This project demonstrates a Chain-of-Thought (CoT) approach to problem-solving using the [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) library and Langgraph Studio. The agent combines two models to iteratively analyze, generate, and validate solutions to computational problems, inspired by the Advent of Code challenges.
+This project demonstrates a Chain-of-Thought (CoT) approach to problem-solving using the [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) library and Langgraph Studio. The agent combines two models to iteratively analyze, generate, and validate solutions to computational problems, inspired by the Advent of Code challenges. 
 
 <!-- TOC -->
 * [CoT Agent Demonstration](#cot-agent-demonstration)
@@ -14,6 +14,7 @@ This project demonstrates a Chain-of-Thought (CoT) approach to problem-solving u
   * [Prerequisites](#prerequisites)
     * [Installation](#installation)
     * [Running the Studio](#running-the-studio)
+  * [additional resources](#additional-resources)
 <!-- TOC -->
 
 ## Overview
@@ -88,6 +89,7 @@ The CoT agent leverages:
 2. **Load Models**:
    - **`llama-3.2`**: Orchestrator model
    - **`qwen2.5`**: Coder model
+![LMStudio - start server and load models](https://raw.githubusercontent.com/zhirafovod/shtuff/main/images/LMStudio-models.png)
 
 3. **Start OpenAI-Compatible API Server**:
    - Use LM Studio to serve the models on `localhost:1234`.
@@ -97,3 +99,17 @@ Launch Langgraph Studio to visualize and interact with the StateGraph:
 ```shell
 uvx --refresh --from "langgraph-cli[inmem]" --with-editable . --python 3.11 langgraph dev
 ```
+You will see langgraph studio application (loaded from smith.langchain.com, but colling your local langgraph API server) running in your browser.  
+![cot_agent langGraph](https://raw.githubusercontent.com/zhirafovod/shtuff/main/images/graph.png)
+Enter the Advent of Code problem day number (e.g., `1`) to the input to start the CoT agent workflow.
+
+You can explore execution status changes when it is passed from node to node
+![Explore execution status passed from node to node](https://raw.githubusercontent.com/zhirafovod/shtuff/main/images/langgraph-execution-state.png)
+
+## additional resources
+- [3brown1blue](https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) - Great playlist to understand neural networks and how and why LLMs work
+- [Advanced chain of thought](https://github.com/GoogleCloudPlatform/generative-ai/blob/main/language/prompts/examples/chain_of_thought_react.ipynb) - Google Cloud Platform example of a chain of thought approach
+- OpenAI O1 CoT
+  - [Thinking in o1 preview](https://openai.com/index/introducing-openai-o1-preview/)
+  - [O1 reasoning](https://platform.openai.com/docs/guides/reasoning)
+- [research-rabbit project](https://github.com/langchain-ai/research-rabbit) - Research Rabbit, a tool to help you research on a topic in the internet (langgraph + Tavily search API + Ollama)
