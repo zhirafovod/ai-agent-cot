@@ -62,9 +62,6 @@ class AOCStateInput(TypedDict):
 class AOCStateOutput(TypedDict):
     final_summary: str
 
-
-
-
 # fetch the problem description
 def fetch_aoc_problem_description(state: AOCState):
     """
@@ -117,7 +114,7 @@ def parse_problem(state: AOCState):
         return {"error": str(e)}
 
 
-# ANALYZE THE PROBLEM
+# Analyze the problem
 def analyze_problem(state: AOCState):
     """
     Have the LLM look at the problem description and generate a short plan or reflection
@@ -136,9 +133,7 @@ def analyze_problem(state: AOCState):
     return {"analysis_summary": result.content}
 
 
-############################################
-# 3) GENERATE CODE
-############################################
+# Generate the code solution
 def generate_code_solution(state: AOCState):
     """
     Use the LLM to generate a Python solution
@@ -197,21 +192,24 @@ def validate_code_solution(state: AOCState):
         return {"validation_success": False}
 
     # Write code to a temp file
-    with open("aoc_solution.py", "w", encoding="utf-8") as f:
-        f.write(solution_code)
+    # with open("aoc_solution.py", "w", encoding="utf-8") as f:
+    #     f.write(solution_code)
 
     # Attempt to run it in a subprocess
     try:
-        process = subprocess.run(
-            ["python", "aoc_solution.py"], capture_output=True, text=True, timeout=10
-        )
-        if process.returncode == 0:
-            # Assume success if code ran with zero return code
-            return {"validation_success": True, "validation_output": process.stdout}
-        else:
-            # Non-zero exit code means failure
-            print("Error output:\n", process.stderr)
-            return {"validation_success": False, "validation_output": process.stderr}
+        ## You can uncomment the below code if you insist on running potentially destructive and unsafe code on your machine.
+        ## I would recommend using a safe sandbox environment instead, like running the langgraph in a docker container.
+        return {"validation_success": True}
+        # process = subprocess.run(
+        #     ["python", "aoc_solution.py"], capture_output=True, text=True, timeout=10
+        # )
+        # if process.returncode == 0:
+        #     # Assume success if code ran with zero return code
+        #     return {"validation_success": True, "validation_output": process.stdout}
+        # else:
+        #     # Non-zero exit code means failure
+        #     print("Error output:\n", process.stderr)
+        #     return {"validation_success": False, "validation_output": process.stderr}
     except Exception as e:
         print("Validation error:\n", e)
         return {"validation_success": False, "validation_output": str(e)}

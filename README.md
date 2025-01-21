@@ -106,13 +106,15 @@ find the following models in the LM Studio model browser and download them:
 ![LMStudio - start server and load models](https://raw.githubusercontent.com/zhirafovod/shtuff/main/images/LMStudio-models.png)
 
 ### Running the Studio
-Launch Langgraph Studio to visualize and interact with the StateGraph:
+Launch Langgraph Studio to visualize and interact with the StateGraph. In the ai-agent-cot directory, run:
 ```shell
 uvx --refresh --from "langgraph-cli[inmem]" --with-editable . --python 3.11 langgraph dev
 ```
 You will see langgraph studio application (loaded from smith.langchain.com, but colling your local langgraph API server) running in your browser.  
 ![cot_agent langGraph](https://raw.githubusercontent.com/zhirafovod/shtuff/main/images/graph.png)
-Enter the Advent of Code problem day number (e.g., `1`) to the input to start the CoT agent workflow.
+Enter the Advent of Code problem day number (e.g., `1`) to the input to start the demo graph execution. 
+
+**Note** you have to uncomment the `Validate Code` function in the `cot_agent.py` to run the graph execution.
 
 You can explore execution status changes when it is passed from node to node
 ![Explore execution status passed from node to node](https://raw.githubusercontent.com/zhirafovod/shtuff/main/images/langgraph-execution-state.png)
