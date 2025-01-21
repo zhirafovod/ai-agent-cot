@@ -83,16 +83,27 @@ The CoT agent leverages:
 ### Installation
 1. **Install Required Tools**:
    - Python 3.11
-   - Langgraph CLI: `pip install langgraph-cli[inmem]`
    - LM Studio for hosting models
+   - The project is using [uv - an extremely fast Python package and project manager, written in Rust.](https://docs.astral.sh/uv/guides/tools/). Ensure you have the `uvx` command available in your terminal. 
+     ```bash
+     curl -LsSf https://astral.sh/uv/install.sh | sh
+     ```
+   - clone the repo and start the langgraph server
+     ```bash
+     git clone https://github.com/zhirafovod/ai-agent-cot.git
+     cd ai-agent-cot
+     uvx --refresh --from "langgraph-cli[inmem]" --with-editable . --python 3.11 langgraph dev 
+     ```
 
-2. **Load Models**:
-   - **`llama-3.2`**: Orchestrator model
-   - **`qwen2.5`**: Coder model
-![LMStudio - start server and load models](https://raw.githubusercontent.com/zhirafovod/shtuff/main/images/LMStudio-models.png)
+2. **Load LMStudio models**:
+find the following models in the LM Studio model browser and download them:
+   - **`llama-3.2`**: Orchestrator model (requires about 2GB of GPU memory, or memory shared with GPU (apple silicon architecture))
+   - **`qwen2.5`**: Coder model (you can use llama-3.2 if qwen2.5 is too big for your machine - requires about 8GB of GPU memory)
 
 3. **Start OpenAI-Compatible API Server**:
-   - Use LM Studio to serve the models on `localhost:1234`.
+   - Use LM Studio to serve the models on `localhost:1234/v1`.
+   - Load both models in the API server 
+![LMStudio - start server and load models](https://raw.githubusercontent.com/zhirafovod/shtuff/main/images/LMStudio-models.png)
 
 ### Running the Studio
 Launch Langgraph Studio to visualize and interact with the StateGraph:
