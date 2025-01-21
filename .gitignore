@@ -5,3 +5,4 @@
 .langgraph_api
 aoc_solution.py
 uv.lock
+__pycache__
